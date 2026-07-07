@@ -32,11 +32,17 @@ try:
             KID = kid_match.group(1)
             KEY = key_match.group(1)
             
-            # Tukar siap-siap ke Base64
+            # === HAA NI SAYA DAH MASUKKAN BALIK UNTUK ABANG ===
+            # Simpan fail keys.txt dahulu supaya GitHub tak error
+            with open("keys.txt", "w", encoding="utf-8") as f:
+                f.write(f"{KID}:{KEY}")
+            print("Berjaya menyimpan fail keys.txt")
+            
+            # Tukar ke Base64 untuk MPD
             base64_kid = hex_to_base64(KID)
             base64_key = hex_to_base64(KEY)
             
-            # 3. Tarik manifest asli TV9 terus dari GitHub Action (Tak kena sekat)
+            # 3. Tarik manifest asli TV9
             target_mpd = "https://ngtv-live-cbj.gcdn.co/Content/DASH/Live/channel(TV9)/master.mpd"
             mpd_res = requests.get(target_mpd, headers={"User-Agent": "Mozilla/5.0 (Linux; Android 10; K)"})
             mpd_text = mpd_res.text
@@ -49,7 +55,7 @@ try:
             
             final_mpd = mpd_text.replace("<AdaptationSet", f"<AdaptationSet>\n{drm_header}")
             
-            # 5. Simpan terus sebagai fail tv9.mpd di GitHub abang!
+            # 5. Simpan fail tv9.mpd
             with open("tv9.mpd", "w", encoding="utf-8") as f:
                 f.write(final_mpd)
                 
@@ -61,4 +67,4 @@ try:
 
 except Exception as e:
     print(f"Ralat: {e}")
-  
+        
