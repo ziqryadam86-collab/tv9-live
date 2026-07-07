@@ -1,0 +1,36 @@
+name: Auto Update Key
+on:
+  schedule:
+    - cron: '*/5 * * * *' # Jalan setiap 5 minit secara auto
+  workflow_dispatch:      # Boleh tekan manual kalau nak test
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write     # Wajib ada untuk bagi kebenaran bot tulis fail
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          
+      - name: Install dependencies
+        run: pip install requests
+        
+      - name: Run Extraction & Jahit MPD
+        run: python update_key.py
+        
+      - name: Commit & Push changes
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "bot@github.com"
+          
+          # HAA TANG NI PENTING! Kita suruh dia add fail mpd sekali
+          git add keys.txt tv9.mpd
+          
+          # Hanya commit kalau ada perubahan kunci/file
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update TV9 Key & MPD File" && git push)
+          
