@@ -1,7 +1,20 @@
-<html>
-<head><title>403 Forbidden</title></head>
-<body>
-<center><h1>403 Forbidden</h1></center>
-<hr><center>nginx</center>
-</body>
-</html>
+<?xml version="1.0" encoding="utf-8"?>
+<MPD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:mpeg:dash:schema:mpd:2011" xmlns:clearkey="http://dashif.org/guidelines/clearKey" xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011 DASH-MPD.xsd" profiles="urn:mpeg:dash:profile:isoff-live:2011" type="dynamic" minimumUpdatePeriod="PT5S" availabilityStartTime="2021-11-23T03:36:20Z" publishTime="2023-10-18T00:00:00Z" timeShiftBufferDepth="PT30S" maxSegmentDuration="PT9S">
+  <Period id="p0" start="PT0S">
+    <AdaptationSet id="0" contentType="video" segmentAlignment="true" bitstreamSwitching="true" maxWidth="1920" maxHeight="1080" maxFrameRate="25" par="16:9">
+      <ContentProtection schemeIdUri="urn:uuid:e251367d-bb43-4d70-970f-5544af77c198" value="ClearKey">
+        <clearkey:Laurl Lic_type="EME-CLEARKEY">data:application/json,{"keys":[{"kty":"oct","kid":"7qCCjDjXRAelw4Stcw1yJA","k":"JQYFw9lzT3d36cRv5aaxdg"}],"type":"temporary"}</clearkey:Laurl>
+      </ContentProtection>
+      <SegmentTemplate timescale="1000" duration="8000" startNumber="1" initialization="https://ngtv-live-cbj.gcdn.co/Content/DASH/Live/channel(TV9)/init-video=$RepresentationID$.dash" media="https://ngtv-live-cbj.gcdn.co/Content/DASH/Live/channel(TV9)/media-video=$RepresentationID$-$Number$.dash"/>
+      <Representation id="1" mimeType="video/mp4" codecs="avc1.64001f" width="1280" height="720" frameRate="25" sar="1:1" bandwidth="2200000"/>
+      <Representation id="2" mimeType="video/mp4" codecs="avc1.640028" width="1920" height="1080" frameRate="25" sar="1:1" bandwidth="4500000"/>
+    </AdaptationSet>
+    <AdaptationSet id="1" contentType="audio" segmentAlignment="true" lang="ms">
+      <ContentProtection schemeIdUri="urn:uuid:e251367d-bb43-4d70-970f-5544af77c198" value="ClearKey">
+        <clearkey:Laurl Lic_type="EME-CLEARKEY">data:application/json,{"keys":[{"kty":"oct","kid":"7qCCjDjXRAelw4Stcw1yJA","k":"JQYFw9lzT3d36cRv5aaxdg"}],"type":"temporary"}</clearkey:Laurl>
+      </ContentProtection>
+      <SegmentTemplate timescale="1000" duration="8000" startNumber="1" initialization="https://ngtv-live-cbj.gcdn.co/Content/DASH/Live/channel(TV9)/init-audio=$RepresentationID$.dash" media="https://ngtv-live-cbj.gcdn.co/Content/DASH/Live/channel(TV9)/media-audio=$RepresentationID$-$Number$.dash"/>
+      <Representation id="1" mimeType="audio/mp4" codecs="mp4a.40.2" audioSamplingRate="48000" bandwidth="128000"/>
+    </AdaptationSet>
+  </Period>
+</MPD>
